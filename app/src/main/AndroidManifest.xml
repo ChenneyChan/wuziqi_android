@@ -16,6 +16,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ServerActivity">
+            <intent-filter>
+                <action android:name="com.example.windc.myapplication.ServerActivity" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ClientActivity">
+            <intent-filter>
+                <action android:name="com.example.windc.myapplication.ClientActivity" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".CalcActivity">
+            <intent-filter>
+                <action android:name="com.example.windc.myapplication.CalcActivity" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

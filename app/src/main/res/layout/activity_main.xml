@@ -1,19 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:background="@color/colorPrimary"-->
-    <!--tools:context=".MainActivity">-->
-
-    <!--<com.example.windc.myapplication.WuziqiPanel-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:text="Hello World!" />-->
-
-<!--</android.support.constraint.ConstraintLayout>-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -52,7 +37,7 @@
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/count"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="30dp"
         android:backgroundTint="#ccc"
         android:typeface="normal"
         android:lineHeight="30dp"
@@ -60,5 +45,34 @@
         android:textAlignment="center"
         android:textSize="30sp"
         android:textStyle="bold" />
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:id="@+id/goto_calc"
+            android:text="进入计算器"
+            android:onClick="onClickToClac"
+            android:gravity="center"/>
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:id="@+id/goto_server"
+            android:text="进入服务器试图"
+            android:onClick="onClickToServer"
+            android:gravity="center"
+            android:visibility="invisible"/>
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:id="@+id/goto_client"
+            android:text="进入客户端试图"
+            android:onClick="onClickToClient"
+            android:gravity="center"
+            android:visibility="invisible"/>
+    </android.support.v7.widget.LinearLayoutCompat>
 
 </LinearLayout>

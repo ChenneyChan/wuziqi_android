@@ -1,6 +1,7 @@
 package com.example.windc.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
@@ -69,5 +70,14 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.e(TAG, "playMusic: error : " + e.toString() );
         }
+    }
+    public void onClickToServer(View view){
+        startActivity(new Intent("com.example.windc.myapplication.ServerActivity"));
+    }
+    public void onClickToClient(View view){
+        startActivity(new Intent("com.example.windc.myapplication.ClientActivity"));
+    }
+    public void onClickToClac(View view) {
+        startActivity(new Intent("com.example.windc.myapplication.CalcActivity"));
     }
 }
