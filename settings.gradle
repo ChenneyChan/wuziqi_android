@@ -1,1 +1,1 @@
-include ':app', ':tcpserverview', ':tcpclientview'
+include ':app', ':tcpserverview', ':tcpclientview', ':clockrefreshview'

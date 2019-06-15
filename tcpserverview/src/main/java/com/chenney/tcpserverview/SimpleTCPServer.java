@@ -41,7 +41,7 @@ public class SimpleTCPServer {
                 try {
                     mServer = new ServerSocket(port);
                     while (mServer != null && !mServer.isClosed()) {
-                        logI("start to accept");
+                        logI("start to accept " + mServer.getInetAddress().toString());
                         Socket client = mServer.accept();
                         if (client.isConnected()) {
                             logI(String.format("accepted from: %s[%d]", client.getInetAddress().getHostAddress(), client.getPort()));
@@ -112,6 +112,13 @@ public class SimpleTCPServer {
         mHandler.sendMessage(message);
     }
 
+    private void pushLogToHandler(String info) {
+        Message message = mHandler.obtainMessage();
+        message.what = 11111;
+        message.obj = info;
+        mHandler.sendMessage(message);
+    }
+
     /**
      * 发送数据
      */
@@ -120,22 +127,30 @@ public class SimpleTCPServer {
             return false;
         }
 
-        Socket socket = mClientList.get(which);
-        if (socket != null && socket.isConnected()) {
-            try {
-                OutputStream out = socket.getOutputStream();
-                out.write(bytes);
-                out.flush();
-                return true;
-            } catch (IOException e) {
-                e.printStackTrace();
+        final byte[] info = bytes;
+        final Socket socket = mClientList.get(which);
+
+        new Thread() {
+            @Override
+            public void run() {
+                if (socket != null && socket.isConnected()) {
+                    try {
+                        OutputStream out = socket.getOutputStream();
+                        out.write(info);
+                        out.flush();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-        }
-        return false;
+        }.start();
+
+        return true;
     }
 
     public boolean sendData(int which, String data) {
-        return sendData(which, data.getBytes(Charset.forName("UTF-8")));
+//        return sendData(which, data.getBytes(Charset.forName("UTF-8")));
+        return false;
     }
 
     public void close() {
@@ -168,5 +183,6 @@ public class SimpleTCPServer {
 
     private void logI(String msg) {
         Log.i(TAG, msg);
+        pushLogToHandler(msg);
     }
 }

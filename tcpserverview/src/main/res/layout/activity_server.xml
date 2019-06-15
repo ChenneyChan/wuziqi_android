@@ -7,12 +7,32 @@
         android:id="@+id/tv_srv_msg"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="TextView"/>
+        android:text="Msg to send to clients"/>
 
     <Button
         android:id="@+id/btn_restart"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="Reset Button"/>
-
+        android:text="SEND TO CLIENT"/>
+    <Button
+        android:id="@+id/start_server"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="START SERVER"/>
+    <Button
+        android:id="@+id/stop_server"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="STOP SERVER"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrl_of_info">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/info_show"
+            android:scrollbars="vertical"
+            android:text="info_to_show"/>
+    </ScrollView>
 </LinearLayout>

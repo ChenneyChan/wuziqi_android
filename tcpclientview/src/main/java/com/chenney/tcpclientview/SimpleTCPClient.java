@@ -1,6 +1,8 @@
 package com.chenney.tcpclientview;
 
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import java.io.IOException;
@@ -32,7 +34,7 @@ public abstract class SimpleTCPClient {
         if (mSocket != null) {
             close();
         }
-
+        Log.i(TAG, "connect: start host " + host + ":" + port);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -42,16 +44,24 @@ public abstract class SimpleTCPClient {
                     // 设置连接超时时间
                     mSocket.connect(socketAddress, CONNECT_TIMEOUT);
                     if (mSocket.isConnected()) {
-                        logI("connected to host success");
+
+                        Log.i(TAG, "run: connected to host success");
+                        log_print("Connected to host success, host is " + mSocket.getRemoteSocketAddress().toString());
                         // 设置读流超时时间，必须在获取流之前设置
                         mSocket.setSoTimeout(INPUT_STREAM_READ_TIMEOUT);
                         mInputStream = mSocket.getInputStream();
                         mOutputStream = mSocket.getOutputStream();
                         new ReceiveThread().start();
                     } else {
+                        log_print("Connected to host timeout, host is " + mSocket.getRemoteSocketAddress().toString());
                         mSocket.close();
                     }
-                } catch (IOException e) {
+//                } catch (SocketTimeoutException e) {
+//                    log_print("Connected to host timeout, host is " + mSocket.getRemoteSocketAddress().toString());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+                } catch (Exception e) {
+                    log_print("Connected to host timeout, host is "  + host + ":" + port);
                     e.printStackTrace();
                 }
             }
@@ -87,7 +97,6 @@ public abstract class SimpleTCPClient {
                     processData(data);
                 }
             }
-
         }
     }
 
@@ -96,22 +105,35 @@ public abstract class SimpleTCPClient {
      */
     public abstract void processData(byte[] data);
 
+    public abstract void log_print(String log);
+
     /**
      * 发送数据
      */
     public void send(byte[] data) {
         if (mSocket != null && mSocket.isConnected() && mOutputStream != null) {
             try {
+                Log.i(TAG, "send: to client:" + mSocket.getRemoteSocketAddress().toString() + " info:" + data.toString());
                 mOutputStream.write(data);
                 mOutputStream.flush();
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
     public void send(String data) {
-        send(data.getBytes(Charset.forName("UTF-8")));
+        final String info = data;
+        new Thread() {
+            @Override
+            public void run() {
+                Log.i(TAG, "run: begin");
+                log_print("send msg to server...");
+                send(info.getBytes(Charset.forName("UTF-8")));
+            }
+        }.start();
     }
 
     public void close() {
@@ -133,7 +155,9 @@ public abstract class SimpleTCPClient {
         return mSocket;
     }
 
-    private void logI(String msg) {
-        Log.i(TAG, msg);
-    }
+//    private void log_print(String info) {
+//        Message message = mHandler.obtainMessage(0);
+//        message.obj = info;
+//        mHandler.sendMessage(message);
+//    }
 }

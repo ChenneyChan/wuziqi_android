@@ -7,12 +7,12 @@
     android:orientation="vertical"
     android:screenOrientation="landscape"
     tools:context=".MainActivity">
-
     <Button
         android:id="@+id/restart_button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:backgroundTint="#CECED6"
+        android:backgroundTint="#FE4365"
+        android:textColor="#F9CDAD"
         android:textSize="20sp"
         android:text="重新开始" />
 
@@ -22,6 +22,7 @@
         android:layout_height="60dp"
         android:backgroundTint="#861C1C"
         android:typeface="normal"
+        android:textColor="#83AB9B"
         android:lineHeight="30dp"
         android:text="当前落子方为:"
         android:textAlignment="center"
@@ -32,47 +33,53 @@
         android:id="@+id/wuziqi_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"/>
-
-    <android.support.v7.widget.AppCompatTextView
+        android:layout_centerInParent="true"
+        android:background="#C8C8A9"/>
+    <TextView
         android:id="@+id/count"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:backgroundTint="#ccc"
-        android:typeface="normal"
         android:lineHeight="30dp"
         android:text="棋子总数: 0"
         android:textAlignment="center"
+        android:textColor="#83AB9B"
         android:textSize="30sp"
-        android:textStyle="bold" />
-    <android.support.v7.widget.LinearLayoutCompat
+        android:textStyle="bold"
+        android:typeface="normal" />
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal" >
-        <Button
-            android:layout_width="120dp"
-            android:layout_height="60dp"
-            android:id="@+id/goto_calc"
-            android:text="进入计算器"
-            android:onClick="onClickToClac"
-            android:gravity="center"/>
-        <Button
-            android:layout_width="120dp"
-            android:layout_height="60dp"
-            android:id="@+id/goto_server"
-            android:text="进入服务器试图"
-            android:onClick="onClickToServer"
-            android:gravity="center"
-            android:visibility="invisible"/>
-        <Button
-            android:layout_width="120dp"
-            android:layout_height="60dp"
-            android:id="@+id/goto_client"
-            android:text="进入客户端试图"
-            android:onClick="onClickToClient"
-            android:gravity="center"
-            android:visibility="invisible"/>
-    </android.support.v7.widget.LinearLayoutCompat>
+        android:layout_height="match_parent">
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:id="@+id/goto_calc"
+                android:text="进入计算器"
+                android:onClick="onClickToClac"
+                android:gravity="center"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:id="@+id/goto_server"
+                android:text="进入服务器试图"
+                android:onClick="onClickToServer"
+                android:gravity="center"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:id="@+id/goto_client"
+                android:text="进入客户端试图"
+                android:onClick="onClickToClient"
+                android:gravity="center"
+                android:visibility="invisible"/>
+        </android.support.v7.widget.LinearLayoutCompat>
+    </ScrollView>
 
 </LinearLayout>
