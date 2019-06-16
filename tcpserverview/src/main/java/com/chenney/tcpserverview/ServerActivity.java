@@ -10,10 +10,12 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
+import java.net.Socket;
 import java.nio.charset.Charset;
 
 public class ServerActivity extends AppCompatActivity {
@@ -24,6 +26,8 @@ public class ServerActivity extends AppCompatActivity {
     private Button btn_stop;
     private TextView info_show;
     private ScrollView sclv;
+    private ScrollView list_sclv;
+    private ListView client_list;
     private final int port = 9000;
     private boolean isFirst = true;
 
@@ -47,6 +51,8 @@ public class ServerActivity extends AppCompatActivity {
         btn_stop = findViewById(R.id.stop_server);
         info_show = findViewById(R.id.info_show);
         sclv = findViewById(R.id.scrl_of_info);
+        list_sclv = findViewById(R.id.list_scrl);
+        client_list = findViewById(R.id.client_list);
     }
 
     private void initView() {
@@ -120,6 +126,17 @@ public class ServerActivity extends AppCompatActivity {
                 switch (which) {
                     case 11111:
                         show_info((String)msg.obj);
+                        break;
+                    case 22222:
+                        Socket client = (Socket) msg.obj;
+                        Log.i(TAG, "handleMessage: " + client.getInetAddress().toString() + ":" + client.getPort());
+
+                        Button clListBt = new Button(activity);
+                        clListBt.setText(client.getRemoteSocketAddress().toString() + ":" + client.getPort());
+                        clListBt.setWidth(client_list.getWidth());
+                        clListBt.setHeight(60);
+                        client_list.addView(clListBt);
+                        list_sclv.invalidate();
                         break;
                    default:
                         byte[] data = (byte[]) msg.obj;

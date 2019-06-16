@@ -3,6 +3,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:textAlignment="center"
+        android:background="@drawable/linearlayout_underline"
+        android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/start_server"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:text="START SERVER"/>
+        <Button
+            android:id="@+id/stop_server"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:text="STOP SERVER"/>
+    </LinearLayout>
     <EditText
         android:id="@+id/tv_srv_msg"
         android:layout_width="match_parent"
@@ -14,16 +36,17 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="SEND TO CLIENT"/>
-    <Button
-        android:id="@+id/start_server"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="START SERVER"/>
-    <Button
-        android:id="@+id/stop_server"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="STOP SERVER"/>
+        android:layout_height="120dp"
+        android:id="@+id/list_scrl">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/client_list">
+        </ListView>
+    </ScrollView>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -37,11 +37,24 @@
             android:layout_height="60dp"
             android:id="@+id/port"
             android:text="9000"/>
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:id="@+id/start_connect"
-            android:text="CONNECT SERVER"/>
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
+                android:id="@+id/start_connect"
+                android:text="CONNECT SERVER"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
+                android:id="@+id/stop_connect"
+                android:text="STOP CONNECT"/>
+        </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

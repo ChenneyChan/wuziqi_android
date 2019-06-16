@@ -55,6 +55,7 @@ public abstract class SimpleTCPClient {
                     } else {
                         log_print("Connected to host timeout, host is " + mSocket.getRemoteSocketAddress().toString());
                         mSocket.close();
+                        mSocket = null;
                     }
 //                } catch (SocketTimeoutException e) {
 //                    log_print("Connected to host timeout, host is " + mSocket.getRemoteSocketAddress().toString());
@@ -146,6 +147,8 @@ public abstract class SimpleTCPClient {
                 mOutputStream = null;
                 mSocket = null;
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

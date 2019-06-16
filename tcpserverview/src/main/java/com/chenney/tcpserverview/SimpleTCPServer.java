@@ -46,6 +46,7 @@ public class SimpleTCPServer {
                         if (client.isConnected()) {
                             logI(String.format("accepted from: %s[%d]", client.getInetAddress().getHostAddress(), client.getPort()));
                             mClientList.add(client);
+                            newClient(client);
                             new Thread(new ReceiveRunnable(mClientList.size() - 1, client)).start();
                         }
                     }
@@ -117,6 +118,14 @@ public class SimpleTCPServer {
         message.what = 11111;
         message.obj = info;
         mHandler.sendMessage(message);
+    }
+
+    private void newClient(Socket socket) {
+        Message message = mHandler.obtainMessage();
+        message.what = 22222;
+        message.obj = socket;
+        mHandler.sendMessage(message);
+        Log.i(TAG, "newClient: " + socket.getRemoteSocketAddress().toString());
     }
 
     /**
